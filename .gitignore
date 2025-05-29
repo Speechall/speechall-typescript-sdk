@@ -54,6 +54,8 @@ pids/
 
 # Generated types (will be regenerated)
 src/types/generated.ts
+wwwroot/*.js
+typings
 
 # Temporary files
 tmp/
