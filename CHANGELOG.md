@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.0.1] - 2024-01-XX
+## [0.0.1] - 2025-05-29
 
 ### Added
 - Initial release of the Speechall TypeScript SDK
