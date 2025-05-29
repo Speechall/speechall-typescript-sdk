@@ -10,6 +10,88 @@ Before you start, ensure you have:
 - [ ] NPM access token generated from npmjs.org
 - [ ] Repository cloned locally
 
+## Publishing Options
+
+### 🤖 Option 1: Automated Publishing (Recommended)
+
+We've set up automated workflows that can publish your package when PRs are merged. Choose between:
+
+#### A. Semantic Release (Smart Automation)
+- **What it does**: Automatically determines version numbers based on commit messages and creates releases
+- **When it publishes**: Only when there are meaningful changes (features, fixes, breaking changes)
+- **Workflow**: `.github/workflows/ci.yml` (release job)
+- **Configuration**: `.releaserc.json`
+
+**How to use:**
+1. Use conventional commit messages in your PRs:
+   - `feat: add new feature` → minor version bump
+   - `fix: resolve bug` → patch version bump  
+   - `feat!: breaking change` → major version bump
+   - `docs: update readme` → no release
+2. Merge PR to main → automatic release + npm publish
+
+#### B. Version-Based Auto Release (Simple)
+- **What it does**: Creates releases when `package.json` version changes
+- **When it publishes**: Every time version in package.json is updated
+- **Workflow**: `.github/workflows/auto-release-simple.yml`
+
+**How to use:**
+1. Update version in `package.json` in your PR
+2. Merge PR to main → automatic release + npm publish
+
+### 📱 Option 2: Manual Publishing
+
+Traditional approach where you manually create releases.
+
+## Setup for Automated Publishing
+
+### Step 1: Configure GitHub Secrets
+Ensure these secrets are set in your repository:
+- `NPM_TOKEN`: Your npm access token
+- `GITHUB_TOKEN`: (automatically provided by GitHub)
+
+### Step 2: Choose Your Workflow
+
+**For Semantic Release:**
+1. The workflow is already configured in `ci.yml`
+2. Install semantic-release dependencies (optional, they're loaded via npx):
+   ```bash
+   npm install --save-dev semantic-release @semantic-release/git @semantic-release/changelog
+   ```
+
+**For Version-Based Release:**
+1. Rename `auto-release-simple.yml` to replace `ci.yml`, or
+2. Use both workflows (semantic release is smarter)
+
+### Step 3: Configure Commit Messages (for Semantic Release)
+
+Use these commit message formats:
+- `feat: description` - New feature (minor bump)
+- `fix: description` - Bug fix (patch bump)  
+- `docs: description` - Documentation only (no release)
+- `style: description` - Code style changes (no release)
+- `refactor: description` - Code refactoring (no release)
+- `test: description` - Test updates (no release)
+- `chore: description` - Maintenance tasks (no release)
+
+For breaking changes, add `!` or use footer:
+- `feat!: breaking change description`
+- Or use commit body with `BREAKING CHANGE: description`
+
+## Automated Workflow Benefits
+
+✅ **Pros:**
+- No manual release steps
+- Consistent versioning
+- Automatic changelog generation (semantic-release)
+- Faster deployment cycle
+- Less human error
+
+⚠️ **Considerations:**
+- Need to be more careful about what gets merged to main
+- Requires team to follow commit message conventions (semantic-release)
+- Every merge could potentially trigger a release
+
 ## Setup NPM Authentication
 
 ### Option 1: Local Publishing Setup
