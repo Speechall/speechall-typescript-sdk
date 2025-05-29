@@ -41,6 +41,11 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    permissions:
+      contents: write      # to create releases and push tags
+      issues: write        # to create issues on failure  
+      pull-requests: write # to comment on pull requests
+      id-token: write      # for npm provenance
     
     steps:
     - uses: actions/checkout@v4
