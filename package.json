@@ -1,6 +1,6 @@
 {
   "name": "@speechall/sdk",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "TypeScript SDK for the Speechall API - A powerful and flexible speech-to-text service",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -56,4 +56,4 @@
   "engines": {
     "node": ">=16"
   }
-} 
+}
