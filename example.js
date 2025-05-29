@@ -1,4 +1,4 @@
-const { Configuration, SpeechToTextApi } = require('speechall-typescript-sdk');
+const { Configuration, SpeechToTextApi } = require('@speechall/sdk');
 
 // Example usage of the Speechall TypeScript SDK
 async function example() {

@@ -1,5 +1,5 @@
 {
-  "name": "speechall-typescript-sdk",
+  "name": "@speechall/sdk",
   "version": "0.0.1",
   "description": "TypeScript SDK for the Speechall API - A powerful and flexible speech-to-text service",
   "main": "dist/index.js",
@@ -14,7 +14,7 @@
   "scripts": {
     "build": "npm run build:cjs && npm run build:esm",
     "build:cjs": "tsc -p tsconfig.json",
-    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:esm": "tsc -p tsconfig.esm.json && node scripts/fix-esm-imports.js",
     "clean": "rimraf dist",
     "prepublishOnly": "npm run clean && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",

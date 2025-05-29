@@ -14,13 +14,13 @@ A TypeScript/JavaScript SDK for the Speechall API, providing powerful and flexib
 ## Installation
 
 ```bash
-npm install speechall-typescript-sdk
+npm install @speechall/sdk
 ```
 
 ## Quick Start
 
 ```typescript
-import { Configuration, SpeechToTextApi } from 'speechall-typescript-sdk';
+import { Configuration, SpeechToTextApi } from '@speechall/sdk';
 
 // Configure the SDK
 const config = new Configuration({
@@ -99,7 +99,7 @@ interface TranscriptionOptions {
 ### Basic Transcription
 
 ```typescript
-import { Configuration, SpeechToTextApi } from 'speechall-typescript-sdk';
+import { Configuration, SpeechToTextApi } from '@speechall/sdk';
 
 const config = new Configuration({ apiKey: 'your-api-key' });
 const api = new SpeechToTextApi(config);
@@ -145,7 +145,7 @@ const result = await api.transcribeRemote({
 ### OpenAI-Compatible API
 
 ```typescript
-import { OpenAICompatibleSpeechToTextApi } from 'speechall-typescript-sdk';
+import { OpenAICompatibleSpeechToTextApi } from '@speechall/sdk';
 
 const openaiApi = new OpenAICompatibleSpeechToTextApi(config);
 
@@ -162,7 +162,7 @@ const result = await openaiApi.openaiCompatibleCreateTranscription(
 ### Custom Replacement Rules
 
 ```typescript
-import { ReplacementRulesApi } from 'speechall-typescript-sdk';
+import { ReplacementRulesApi } from '@speechall/sdk';
 
 const rulesApi = new ReplacementRulesApi(config);
 
