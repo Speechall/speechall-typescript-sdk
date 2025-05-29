@@ -1,7 +1,7 @@
 import { 
   Configuration, 
   SpeechToTextApi, 
-  OpenAICompatibleSpeechToTextApi,
+  // OpenAICompatibleSpeechToTextApi,
   ReplacementRulesApi,
   TranscriptionOptions,
   TranscriptionModelIdentifier
@@ -17,7 +17,7 @@ async function main(): Promise<void> {
 
   // Create API instances
   const speechApi = new SpeechToTextApi(config);
-  const openaiApi = new OpenAICompatibleSpeechToTextApi(config);
+  // const openaiApi = new OpenAICompatibleSpeechToTextApi(config);
   const rulesApi = new ReplacementRulesApi(config);
 
   try {
