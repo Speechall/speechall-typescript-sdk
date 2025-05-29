@@ -1,0 +1,59 @@
+{
+  "name": "speechall-typescript-sdk",
+  "version": "0.0.1",
+  "description": "TypeScript SDK for the Speechall API - A powerful and flexible speech-to-text service",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/esm/index.js",
+  "sideEffects": false,
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc -p tsconfig.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run clean && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
+  },
+  "keywords": [
+    "speechall",
+    "speech-to-text",
+    "stt",
+    "transcription",
+    "audio",
+    "voice",
+    "api",
+    "typescript",
+    "sdk"
+  ],
+  "author": "Speechall",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/speechall/speechall-typescript-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/speechall/speechall-typescript-sdk/issues"
+  },
+  "homepage": "https://github.com/speechall/speechall-typescript-sdk#readme",
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "rimraf": "^5.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+} 
