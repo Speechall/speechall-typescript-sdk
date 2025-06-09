@@ -156,7 +156,7 @@ const { status, data } = await apiInstance.transcribe(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **transcribeRemote**
-> TranscriptionResponse transcribeRemote(transcriptionOptions)
+> TranscriptionResponse transcribeRemote(remoteTranscriptionConfiguration)
 
 This endpoint allows you to transcribe an audio file hosted at a publicly accessible URL. Provide the URL and transcription options within the JSON request body. Useful for transcribing files already stored online. 
 
@@ -166,16 +166,16 @@ This endpoint allows you to transcribe an audio file hosted at a publicly access
 import {
     SpeechToTextApi,
     Configuration,
-    TranscriptionOptions
+    RemoteTranscriptionConfiguration
 } from './api';
 
 const configuration = new Configuration();
 const apiInstance = new SpeechToTextApi(configuration);
 
-let transcriptionOptions: TranscriptionOptions; //JSON object containing the URL of the audio file and the desired transcription options.
+let remoteTranscriptionConfiguration: RemoteTranscriptionConfiguration; //JSON object containing the URL of the audio file and the desired transcription options.
 
 const { status, data } = await apiInstance.transcribeRemote(
-    transcriptionOptions
+    remoteTranscriptionConfiguration
 );
 ```
 
@@ -183,7 +183,7 @@ const { status, data } = await apiInstance.transcribeRemote(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **transcriptionOptions** | **TranscriptionOptions**| JSON object containing the URL of the audio file and the desired transcription options. | |
+| **remoteTranscriptionConfiguration** | **RemoteTranscriptionConfiguration**| JSON object containing the URL of the audio file and the desired transcription options. | |
 
 
 ### Return type

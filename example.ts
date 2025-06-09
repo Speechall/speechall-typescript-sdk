@@ -3,7 +3,7 @@ import {
   SpeechToTextApi, 
   // OpenAICompatibleSpeechToTextApi,
   ReplacementRulesApi,
-  TranscriptionOptions,
+  RemoteTranscriptionConfiguration,
   TranscriptionModelIdentifier
 } from './index';
 
@@ -33,7 +33,7 @@ async function main(): Promise<void> {
 
     // Example 1: Basic transcription
     console.log('Example 1: Basic transcription...');
-    const basicOptions: TranscriptionOptions = {
+    const basicOptions: RemoteTranscriptionConfiguration = {
       file_url: 'https://example.com/sample-audio.mp3',
       model: TranscriptionModelIdentifier.DeepgramNova2General,
       language: 'en',
@@ -45,7 +45,7 @@ async function main(): Promise<void> {
 
     // Example 2: Advanced transcription with options
     console.log('\nExample 2: Advanced transcription...');
-    const advancedOptions: TranscriptionOptions = {
+    const advancedOptions: RemoteTranscriptionConfiguration = {
       file_url: 'https://example.com/meeting-audio.mp3',
       model: TranscriptionModelIdentifier.DeepgramNova2Meeting,
       language: 'en',

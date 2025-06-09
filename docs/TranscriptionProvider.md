@@ -18,6 +18,8 @@ The identifier for the underlying Speech-to-Text service provider (e.g., \'opena
 
 * `Fireworksai` (value: `'fireworksai'`)
 
+* `Gemini` (value: `'gemini'`)
+
 * `Gladia` (value: `'gladia'`)
 
 * `Google` (value: `'google'`)

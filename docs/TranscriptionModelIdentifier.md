@@ -10,9 +10,17 @@ Unique identifier for a specific Speech-to-Text model, composed as `provider.mod
 
 * `AssemblyaiNano` (value: `'assemblyai.nano'`)
 
+* `AssemblyaiSlam1` (value: `'assemblyai.slam-1'`)
+
+* `AssemblyaiUniversal` (value: `'assemblyai.universal'`)
+
 * `AzureStandard` (value: `'azure.standard'`)
 
 * `CloudflareWhisper` (value: `'cloudflare.whisper'`)
+
+* `CloudflareWhisperLargeV3Turbo` (value: `'cloudflare.whisper-large-v3-turbo'`)
+
+* `CloudflareWhisperTinyEn` (value: `'cloudflare.whisper-tiny-en'`)
 
 * `DeepgramBase` (value: `'deepgram.base'`)
 
@@ -42,6 +50,10 @@ Unique identifier for a specific Speech-to-Text model, composed as `provider.mod
 
 * `DeepgramNova` (value: `'deepgram.nova'`)
 
+* `DeepgramNovaGeneral` (value: `'deepgram.nova-general'`)
+
+* `DeepgramNovaPhonecall` (value: `'deepgram.nova-phonecall'`)
+
 * `DeepgramNova2` (value: `'deepgram.nova-2'`)
 
 * `DeepgramNova2Atc` (value: `'deepgram.nova-2-atc'`)
@@ -68,9 +80,9 @@ Unique identifier for a specific Speech-to-Text model, composed as `provider.mod
 
 * `DeepgramNova3` (value: `'deepgram.nova-3'`)
 
-* `DeepgramNovaGeneral` (value: `'deepgram.nova-general'`)
+* `DeepgramNova3General` (value: `'deepgram.nova-3-general'`)
 
-* `DeepgramNovaPhonecall` (value: `'deepgram.nova-phonecall'`)
+* `DeepgramNova3Medical` (value: `'deepgram.nova-3-medical'`)
 
 * `DeepgramWhisper` (value: `'deepgram.whisper'`)
 
@@ -83,6 +95,10 @@ Unique identifier for a specific Speech-to-Text model, composed as `provider.mod
 * `DeepgramWhisperSmall` (value: `'deepgram.whisper-small'`)
 
 * `DeepgramWhisperTiny` (value: `'deepgram.whisper-tiny'`)
+
+* `FalaiElevenlabsSpeechToText` (value: `'falai.elevenlabs-speech-to-text'`)
+
+* `FalaiSpeechToText` (value: `'falai.speech-to-text'`)
 
 * `FalaiWhisper` (value: `'falai.whisper'`)
 
@@ -97,6 +113,14 @@ Unique identifier for a specific Speech-to-Text model, composed as `provider.mod
 * `GoogleEnhanced` (value: `'google.enhanced'`)
 
 * `GoogleStandard` (value: `'google.standard'`)
+
+* `GeminiGemini25FlashPreview0520` (value: `'gemini.gemini-2.5-flash-preview-05-20'`)
+
+* `GeminiGemini25ProPreview0605` (value: `'gemini.gemini-2.5-pro-preview-06-05'`)
+
+* `GeminiGemini20Flash` (value: `'gemini.gemini-2.0-flash'`)
+
+* `GeminiGemini20FlashLite` (value: `'gemini.gemini-2.0-flash-lite'`)
 
 * `GroqDistilWhisperLargeV3En` (value: `'groq.distil-whisper-large-v3-en'`)
 
@@ -113,6 +137,8 @@ Unique identifier for a specific Speech-to-Text model, composed as `provider.mod
 * `OpenaiGpt4oMiniTranscribe` (value: `'openai.gpt-4o-mini-transcribe'`)
 
 * `RevaiMachine` (value: `'revai.machine'`)
+
+* `RevaiFusion` (value: `'revai.fusion'`)
 
 * `SpeechmaticsEnhanced` (value: `'speechmatics.enhanced'`)
 
