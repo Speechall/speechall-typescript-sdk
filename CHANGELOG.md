@@ -1,3 +1,10 @@
+# 1.0.0 (2025-06-09)
+
+
+### Features
+
+* update 0.1.0 version of openapi document ([ee4b7b2](https://github.com/speechall/speechall-typescript-sdk/commit/ee4b7b2391dec9b1729c34413546585d8d9dd636))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
@@ -18,4 +25,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for multiple output formats (JSON, text, SRT, VTT)
 - Support for multiple STT providers through unified API
 - CommonJS and ESM build outputs
-- Comprehensive documentation and examples 
+- Comprehensive documentation and examples
