@@ -142,23 +142,6 @@ const result = await api.transcribeRemote({
 });
 ```
 
-### OpenAI-Compatible API
-
-```typescript
-import { OpenAICompatibleSpeechToTextApi } from '@speechall/sdk';
-
-const openaiApi = new OpenAICompatibleSpeechToTextApi(config);
-
-const result = await openaiApi.openaiCompatibleCreateTranscription(
-  file,                           // File object
-  'deepgram.nova-2-general',     // model
-  'en',                          // language
-  'Transcribe this audio file',  // prompt
-  'json',                        // response_format
-  0.2                            // temperature
-);
-```
-
 ### Custom Replacement Rules
 
 ```typescript
