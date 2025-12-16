@@ -43,3 +43,4 @@ yarn-error.log*
 coverage/
 .nyc_output/
 .claude/settings.local.json
+.claude-trace/
