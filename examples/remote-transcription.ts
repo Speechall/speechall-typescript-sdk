@@ -5,7 +5,8 @@
  * This is useful when your audio files are already hosted online (e.g., on S3, CDN, etc.).
  */
 
-import { SpeechallClient } from '../src/index.js';
+import 'dotenv/config';
+import { SpeechallClient } from '../src/index';
 
 async function main() {
   // Initialize the Speechall client with your API token

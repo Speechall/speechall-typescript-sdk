@@ -6,7 +6,8 @@
  * Use this to discover what models are available and their capabilities.
  */
 
-import { SpeechallClient } from '../src/index.js';
+import 'dotenv/config';
+import { SpeechallClient } from '../src/index';
 
 async function main() {
   // Initialize the Speechall client with your API token

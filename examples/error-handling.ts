@@ -6,8 +6,9 @@
  * during API calls.
  */
 
-import { SpeechallClient, SpeechallError } from '../src/index.js';
-import * as Speechall from '../src/api/index.js';
+import 'dotenv/config';
+import { SpeechallClient, SpeechallError } from '../src/index';
+import * as Speechall from '../src/api/index';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -121,7 +122,7 @@ async function main() {
 
     // Try to transcribe a non-existent remote file
     await client.speechToText.transcribeRemote({
-      file_url: 'https://example.com/nonexistent-file.mp3',
+      file_url: 'https://dss-kiel.de/images/media_center/signals/lombard/male_0_kmh.mp3',
       model: 'openai.whisper-1',
     });
 

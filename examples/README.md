@@ -11,7 +11,12 @@ This directory contains example scripts demonstrating how to use the Speechall T
 
 2. Get your API key from [Speechall](https://speechall.com)
 
-3. Set your API key as an environment variable:
+3. Create a `.env` file in the project root and add your API key:
+   ```bash
+   SPEECHALL_API_KEY=your-api-key-here
+   ```
+
+   Or alternatively, set it as an environment variable:
    ```bash
    export SPEECHALL_API_KEY=your-api-key
    ```

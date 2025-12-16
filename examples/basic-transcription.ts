@@ -5,7 +5,8 @@
  * It shows the simplest way to get started with speech-to-text transcription.
  */
 
-import { SpeechallClient } from '../src/index.js';
+import 'dotenv/config';
+import { SpeechallClient } from '../src/index';
 import * as fs from 'fs';
 import * as path from 'path';
 
