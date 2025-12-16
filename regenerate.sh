@@ -1,14 +1,16 @@
 #!/bin/bash
 set -e
 
-echo "Validating OpenAPI spec..."
-# Check if OpenAPI file exists - UPDATE PATH AS NEEDED
-if [ ! -f "../speechall-openapi/openapi.yaml" ]; then
-    echo "Error: OpenAPI spec not found at ../speechall-openapi/openapi.yaml"
+echo "Validating Fern configuration..."
+
+if [ ! -f "fern/generators.yml" ]; then
+    echo "Error: fern/generators.yml not found"
     exit 1
 fi
 
-echo "OpenAPI spec found"
+echo "Using OpenAPI spec configured in fern/generators.yml"
+echo "Note: The OpenAPI spec path is configured in fern/generators.yml"
+echo "For local OpenAPI changes, edit fern/generators.yml to use your local path."
 
 echo "Generating TypeScript SDK with Fern..."
 fern generate --local --force

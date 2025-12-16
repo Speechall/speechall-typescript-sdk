@@ -1,7 +1,10 @@
 # yaml-language-server: $schema=https://schema.buildwithfern.dev/generators-yml.json
 api:
   specs:
-    - openapi: ../../speechall-openapi/openapi.yaml
+    # Fern doesn't support remote URLs in generators.yml (only local paths)
+    # The remote URL is public: https://raw.githubusercontent.com/Speechall/speechall-openapi/refs/heads/main/openapi.yaml
+    # But must be downloaded locally first via: fern init --openapi <url>
+    - openapi: ../../../Speechall-Repositories/speechall-openapi/openapi.yaml
 
 default-group: local
 

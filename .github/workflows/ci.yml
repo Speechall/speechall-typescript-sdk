@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  validate:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -15,43 +15,27 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          # Need to checkout sibling repo for OpenAPI spec
-          path: speechall-typescript-sdk
-
-      - name: Checkout OpenAPI spec
-        uses: actions/checkout@v4
-        with:
-          repository: Speechall/speechall-openapi
-          path: speechall-openapi
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-          cache-dependency-path: speechall-typescript-sdk/package.json
-
-      - name: Install Fern CLI
-        run: npm install -g fern-api
-
-      - name: Validate OpenAPI spec with Fern
-        working-directory: speechall-typescript-sdk
-        run: fern check
 
       - name: Install dependencies
-        working-directory: speechall-typescript-sdk
         run: npm ci
 
       - name: Build SDK
-        working-directory: speechall-typescript-sdk
         run: npm run build
 
-      - name: Test package can be imported
-        working-directory: speechall-typescript-sdk
-        run: node -e "require('./dist/index.js')"
-
       - name: Verify TypeScript compilation
-        working-directory: speechall-typescript-sdk
         run: npx tsc --noEmit
+
+      - name: Run unit tests
+        run: npm run test:unit
+
+      - name: Run integration tests
+        run: npm run test:integration
+
+      - name: Test package can be imported
+        run: node -e "require('./dist/index.js')"
