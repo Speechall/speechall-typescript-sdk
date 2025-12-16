@@ -12,7 +12,6 @@ Official TypeScript SDK for [Speechall](https://speechall.com) - A powerful spee
 - Custom vocabulary and replacement rules
 - Multiple output formats (text, JSON, SRT, VTT)
 - Word-level and segment-level timestamps
-- OpenAI-compatible API endpoints
 - TypeScript support with full type definitions
 
 ## Installation
@@ -218,28 +217,6 @@ const result = await client.speechToText.transcribe(audioFile, {
   model: 'openai.whisper-1',
   language: 'en',
   ruleset_id: ruleset.id,
-});
-```
-
-### OpenAI-Compatible API
-
-Use OpenAI-compatible endpoints for drop-in replacement:
-
-```typescript
-// Transcription
-const transcription = await client.openAiCompatibleSpeechToText.createTranscription({
-  file: fs.createReadStream('./audio.mp3'),
-  model: 'amazon.transcribe',
-  language: 'en',
-  response_format: 'json',
-  temperature: 0.2,
-});
-
-// Translation
-const translation = await client.openAiCompatibleSpeechToText.createTranslation({
-  file: fs.createReadStream('./audio.mp3'),
-  model: 'openai.whisper-1',
-  response_format: 'json',
 });
 ```
 

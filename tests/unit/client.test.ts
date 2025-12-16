@@ -25,13 +25,6 @@ describe('SpeechallClient', () => {
       expect(client.speechToText).toBeDefined();
     });
 
-    it('should expose openAiCompatibleSpeechToText client', () => {
-      const client = new SpeechallClient({
-        token: 'test-api-token',
-      });
-      expect(client.openAiCompatibleSpeechToText).toBeDefined();
-    });
-
     it('should expose replacementRules client', () => {
       const client = new SpeechallClient({
         token: 'test-api-token',
@@ -83,15 +76,6 @@ describe('SpeechallClient', () => {
       });
       const firstAccess = client.speechToText;
       const secondAccess = client.speechToText;
-      expect(firstAccess).toBe(secondAccess);
-    });
-
-    it('should lazily initialize openAiCompatibleSpeechToText client', () => {
-      const client = new SpeechallClient({
-        token: 'test-api-token',
-      });
-      const firstAccess = client.openAiCompatibleSpeechToText;
-      const secondAccess = client.openAiCompatibleSpeechToText;
       expect(firstAccess).toBe(secondAccess);
     });
 

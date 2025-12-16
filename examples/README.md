@@ -9,9 +9,14 @@ This directory contains example scripts demonstrating how to use the Speechall T
    npm install
    ```
 
-2. Get your API key from [Speechall](https://speechall.com)
+2. Build the SDK (required before running examples):
+   ```bash
+   npm run build
+   ```
 
-3. Create a `.env` file in the project root and add your API key:
+3. Get your API key from [Speechall](https://speechall.com)
+
+4. Create a `.env` file in the project root and add your API key:
    ```bash
    SPEECHALL_API_KEY=your-api-key-here
    ```
@@ -23,15 +28,17 @@ This directory contains example scripts demonstrating how to use the Speechall T
 
 ## Running Examples
 
-Run any example using ts-node:
+Run any example using `tsx` (not `ts-node`):
 
 ```bash
-npx ts-node examples/basic-transcription.ts
-npx ts-node examples/remote-transcription.ts
-npx ts-node examples/advanced-options.ts
-npx ts-node examples/error-handling.ts
-npx ts-node examples/openai-compatible.ts
+npx tsx examples/basic-transcription.ts
+npx tsx examples/remote-transcription.ts
+npx tsx examples/advanced-options.ts
+npx tsx examples/error-handling.ts
+npx tsx examples/list-models.ts
 ```
+
+**Note:** We use `tsx` instead of `ts-node` because the SDK uses `.js` extensions in TypeScript imports for ESM compatibility. `tsx` handles these extensions correctly, while `ts-node` will fail with "Cannot find module" errors.
 
 ## Examples Overview
 
@@ -61,12 +68,6 @@ Proper error handling patterns. Demonstrates:
 - Catching and handling SDK-specific errors
 - Error types (BadRequestError, UnauthorizedError, etc.)
 - Accessing error details and status codes
-
-### 5. `openai-compatible.ts`
-Using OpenAI-compatible endpoints. Demonstrates:
-- Drop-in replacement for OpenAI's Whisper API
-- Multipart form-data file uploads
-- Translation capabilities
 
 ## Audio File Requirements
 
@@ -103,6 +104,30 @@ Popular models include:
 For complete API documentation, visit:
 - [Speechall API Documentation](https://docs.speechall.com)
 - [GitHub Repository](https://github.com/Speechall/speechall-typescript-sdk)
+
+## Troubleshooting
+
+### "Cannot find module './api/index.js'" Error
+
+If you see this error when running examples:
+```
+Error: Cannot find module './api/index.js'
+```
+
+**Solution:**
+1. Make sure you've built the SDK first: `npm run build`
+2. Use `npx tsx` instead of `npx ts-node` to run examples
+3. The SDK uses `.js` extensions in imports for ESM compatibility, which `tsx` handles correctly
+
+### "SPEECHALL_API_KEY is not defined" Error
+
+**Solution:**
+- Create a `.env` file in the project root with your API key
+- Or set the environment variable: `export SPEECHALL_API_KEY=your-api-key`
+
+### Example Uses Fake/Placeholder URLs
+
+Some examples (like `remote-transcription.ts`) use placeholder URLs like `https://example.com/path/to/audio.mp3`. Replace these with real audio file URLs for testing.
 
 ## Support
 

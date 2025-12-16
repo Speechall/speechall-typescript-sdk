@@ -50,50 +50,6 @@ describeIntegration('API Integration Tests', () => {
     }, 30000);
   });
 
-  describe('OpenAI Compatible API', () => {
-    it('should transcribe using OpenAI-compatible endpoint', async () => {
-      const audioPath = path.join(__dirname, '../fixtures/audio-sample.wav');
-
-      if (!fs.existsSync(audioPath)) {
-        console.log('Skipping: No audio fixture available');
-        return;
-      }
-
-      const audioBuffer = fs.readFileSync(audioPath);
-      const audioFile = new File([audioBuffer], 'audio-sample.wav', {
-        type: 'audio/wav',
-      });
-
-      const response = await client.openAiCompatibleSpeechToText.openaiCompatibleCreateTranscription({
-        file: audioFile,
-        model: 'openai.whisper-1',
-      });
-
-      expect(response).toBeDefined();
-    }, 30000);
-
-    it('should translate using OpenAI-compatible endpoint', async () => {
-      const audioPath = path.join(__dirname, '../fixtures/audio-sample.wav');
-
-      if (!fs.existsSync(audioPath)) {
-        console.log('Skipping: No audio fixture available');
-        return;
-      }
-
-      const audioBuffer = fs.readFileSync(audioPath);
-      const audioFile = new File([audioBuffer], 'audio-sample.wav', {
-        type: 'audio/wav',
-      });
-
-      const response = await client.openAiCompatibleSpeechToText.openaiCompatibleCreateTranslation({
-        file: audioFile,
-        model: 'openai.whisper-1',
-      });
-
-      expect(response).toBeDefined();
-    }, 30000);
-  });
-
   describe('Replacement Rules API', () => {
     it('should create replacement ruleset', async () => {
       const ruleset = await client.replacementRules.createReplacementRuleset({
@@ -128,12 +84,6 @@ describe('API Integration Tests (Mocked)', () => {
     expect(typeof client.speechToText.transcribe).toBe('function');
     expect(typeof client.speechToText.transcribeRemote).toBe('function');
     expect(typeof client.speechToText.listSpeechToTextModels).toBe('function');
-  });
-
-  it('should have openAiCompatibleSpeechToText client available', () => {
-    expect(client.openAiCompatibleSpeechToText).toBeDefined();
-    expect(typeof client.openAiCompatibleSpeechToText.openaiCompatibleCreateTranscription).toBe('function');
-    expect(typeof client.openAiCompatibleSpeechToText.openaiCompatibleCreateTranslation).toBe('function');
   });
 
   it('should have replacementRules client available', () => {

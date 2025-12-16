@@ -25,8 +25,8 @@ npm run test:coverage   # Tests with coverage report
 fern generate --local --force  # Manual generation
 fern check              # Validate OpenAPI spec
 
-# Run examples
-npx ts-node examples/basic-transcription.ts
+# Run examples (requires npm run build first)
+npx tsx examples/basic-transcription.ts  # Use tsx, not ts-node
 ```
 
 ## Architecture
@@ -45,9 +45,6 @@ SpeechallClient
 │   ├── transcribe()          // Local audio file
 │   ├── transcribeRemote()    // Remote URL
 │   └── listSpeechToTextModels()
-├── openAiCompatibleSpeechToText  // OpenAI-compatible endpoints
-│   ├── createTranscription()
-│   └── createTranslation()
 └── replacementRules          // Text replacement rulesets
     └── create()
 ```
