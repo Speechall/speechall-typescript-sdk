@@ -1,0 +1,42 @@
+{
+  "name": "speechall",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for Speechall API - Speech-to-text transcription service",
+  "author": "Speechall",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Speechall/speechall-typescript-sdk"
+  },
+  "homepage": "https://docs.speechall.com",
+  "keywords": [
+    "speechall",
+    "speech-to-text",
+    "transcription",
+    "api",
+    "sdk"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "jest",
+    "test:unit": "jest tests/unit",
+    "test:integration": "jest tests/integration",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "@types/url-join": "4.0.1",
+    "url-join": "4.0.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.0.0",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
+  }
+}

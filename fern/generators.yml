@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://schema.buildwithfern.dev/generators-yml.json
+api:
+  specs:
+    - openapi: ../../speechall-openapi/openapi.yaml
+
+default-group: local
+
+groups:
+  local:
+    generators:
+      - name: fernapi/fern-typescript-sdk
+        version: 3.42.0
+        output:
+          location: local-file-system
+          path: ../src
+        config:
+          namespaceExport: Speechall
+          enableInlineTypes: true
+          generateWireTests: true
+          neverThrowErrors: false
+          skipResponseValidation: false
+          treatUnknownAsAny: false
+          outputSourceFiles: true
+          packageJson:
+            name: speechall
+            version: 0.1.0
+            description: "TypeScript SDK for Speechall API - Speech-to-text transcription service"
+            author: Speechall
+            license: MIT
+            repository:
+              type: git
+              url: "https://github.com/Speechall/speechall-typescript-sdk"
+            homepage: "https://docs.speechall.com"
+            keywords:
+              - speechall
+              - speech-to-text
+              - transcription
+              - api
+              - sdk

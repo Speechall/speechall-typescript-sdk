@@ -1,100 +1,57 @@
-name: CI/CD
+name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
-  release:
-    types: [ created ]
+    branches: [main]
 
 jobs:
-  test:
+  validate:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x, 18.x, 20.x]
+        node-version: [18.x, 20.x]
 
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Run lint
-      run: npm run lint
-    
-    - name: Build package
-      run: npm run build
-    
-    - name: Test package can be imported
-      run: node -e "require('./dist/index.js')"
+      - uses: actions/checkout@v4
+        with:
+          # Need to checkout sibling repo for OpenAPI spec
+          path: speechall-typescript-sdk
 
-  # Semantic Release - automatically creates releases and publishes on merge to main
-  release:
-    needs: test
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    permissions:
-      contents: write      # to create releases and push tags
-      issues: write        # to create issues on failure  
-      pull-requests: write # to comment on pull requests
-      id-token: write      # for npm provenance
-    
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0  # Fetch full history for semantic-release
-        token: ${{ secrets.GITHUB_TOKEN }}
-    
-    - name: Use Node.js 18
-      uses: actions/setup-node@v4
-      with:
-        node-version: 18
-        cache: 'npm'
-        registry-url: 'https://registry.npmjs.org'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Build package
-      run: npm run build
-    
-    - name: Semantic Release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      run: npx semantic-release
+      - name: Checkout OpenAPI spec
+        uses: actions/checkout@v4
+        with:
+          repository: Speechall/speechall-openapi
+          path: speechall-openapi
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-  # Keep the old publish job for manual releases (optional)
-  publish:
-    needs: test
-    runs-on: ubuntu-latest
-    if: github.event_name == 'release'
-    
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Use Node.js 18
-      uses: actions/setup-node@v4
-      with:
-        node-version: 18
-        cache: 'npm'
-        registry-url: 'https://registry.npmjs.org'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Build package
-      run: npm run build
-    
-    - name: Publish to NPM
-      run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} 
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: speechall-typescript-sdk/package.json
+
+      - name: Install Fern CLI
+        run: npm install -g fern-api
+
+      - name: Validate OpenAPI spec with Fern
+        working-directory: speechall-typescript-sdk
+        run: fern check
+
+      - name: Install dependencies
+        working-directory: speechall-typescript-sdk
+        run: npm ci
+
+      - name: Build SDK
+        working-directory: speechall-typescript-sdk
+        run: npm run build
+
+      - name: Test package can be imported
+        working-directory: speechall-typescript-sdk
+        run: node -e "require('./dist/index.js')"
+
+      - name: Verify TypeScript compilation
+        working-directory: speechall-typescript-sdk
+        run: npx tsc --noEmit
