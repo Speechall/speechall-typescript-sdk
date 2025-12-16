@@ -16,27 +16,14 @@ export interface BaseTranscriptionConfiguration {
     ruleset_id?: string;
     /** Whether to add punctuation. Support varies by model (e.g., Deepgram, AssemblyAI). Defaults to `true`. */
     punctuation?: boolean;
-    /** Level of timestamp detail (`word` or `segment`). Defaults to `segment`. */
-    timestamp_granularity?: BaseTranscriptionConfiguration.TimestampGranularity;
     /** Enable speaker diarization. Defaults to `false`. */
     diarization?: boolean;
     /** Optional text prompt to guide the transcription model. Support varies (e.g., OpenAI). */
     initial_prompt?: string;
     /** Controls output randomness for supported models (e.g., OpenAI). Value between 0 and 1. */
     temperature?: number;
-    /** Enable provider-specific smart formatting (e.g., Deepgram). Defaults vary. */
-    smart_format?: boolean;
     /** Hint for the number of expected speakers for diarization (e.g., RevAI, Deepgram). */
     speakers_expected?: number;
     /** List of custom words/phrases to improve recognition (e.g., Deepgram, AssemblyAI). */
     custom_vocabulary?: string[];
-}
-
-export namespace BaseTranscriptionConfiguration {
-    /** Level of timestamp detail (`word` or `segment`). Defaults to `segment`. */
-    export const TimestampGranularity = {
-        Word: "word",
-        Segment: "segment",
-    } as const;
-    export type TimestampGranularity = (typeof TimestampGranularity)[keyof typeof TimestampGranularity];
 }

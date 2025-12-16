@@ -27,7 +27,8 @@ groups:
           packageJson:
             name: speechall
             version: 0.1.0
-            description: "TypeScript SDK for Speechall API - Speech-to-text transcription service"
+            description: "TypeScript SDK for Speechall API - Speech-to-text transcription
+              service"
             author: Speechall
             license: MIT
             repository:

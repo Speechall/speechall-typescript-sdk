@@ -70,10 +70,6 @@ export class SpeechToTextClient {
             _queryParams.punctuation = request.punctuation.toString();
         }
 
-        if (request.timestamp_granularity != null) {
-            _queryParams.timestamp_granularity = request.timestamp_granularity;
-        }
-
         if (request.diarization != null) {
             _queryParams.diarization = request.diarization.toString();
         }
@@ -84,10 +80,6 @@ export class SpeechToTextClient {
 
         if (request.temperature != null) {
             _queryParams.temperature = request.temperature.toString();
-        }
-
-        if (request.smart_format != null) {
-            _queryParams.smart_format = request.smart_format.toString();
         }
 
         if (request.speakers_expected != null) {

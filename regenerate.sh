@@ -17,6 +17,11 @@ fern generate --local --force
 
 echo "SDK generation complete!"
 
+# Apply post-generation fixes for known Fern generator bugs
+if [ -f "scripts/fix-generated-code.sh" ]; then
+    ./scripts/fix-generated-code.sh
+fi
+
 # Optional: Run type checking
 if [ -f "tsconfig.json" ]; then
     echo "Running TypeScript type check..."

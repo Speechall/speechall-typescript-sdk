@@ -13,16 +13,12 @@ export interface TranscribeRequest {
     ruleset_id?: string;
     /** Enable automatic punctuation (commas, periods, question marks) in the transcription. Support varies by model/provider (e.g., Deepgram, AssemblyAI). Defaults to `true`. */
     punctuation?: boolean;
-    /** Specifies the level of detail for timestamps in the response (if `output_format` is `json` or `verbose_json`). `segment` provides timestamps for larger chunks of speech, while `word` provides timestamps for individual words (may increase latency). Defaults to `segment`. */
-    timestamp_granularity?: Speechall.TranscribeRequestTimestampGranularity;
     /** Enable speaker diarization to identify and label different speakers in the audio. Support and quality vary by model/provider. Defaults to `false`. When enabled, the `speaker` field may be populated in the response segments. */
     diarization?: boolean;
     /** An optional text prompt to provide context, guide the model's style (e.g., spelling of specific names), or improve accuracy for subsequent audio segments. Support varies by model (e.g., OpenAI models). */
     initial_prompt?: string;
     /** Controls the randomness of the output for certain models (e.g., OpenAI). A value between 0 and 1. Lower values (e.g., 0.2) make the output more deterministic, while higher values (e.g., 0.8) make it more random. Defaults vary by model. */
     temperature?: number;
-    /** Enable provider-specific "smart formatting" features, which might include formatting for numbers, dates, currency, etc. Currently supported by Deepgram models. Defaults vary. */
-    smart_format?: boolean;
     /** Provides a hint to the diarization process about the number of expected speakers. May improve accuracy for some providers (e.g., RevAI, Deepgram). */
     speakers_expected?: number;
     /** Provide a list of specific words or phrases (e.g., proper nouns, jargon) to increase their recognition likelihood. Support varies by provider (e.g., Deepgram, AssemblyAI). */

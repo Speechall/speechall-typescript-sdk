@@ -70,6 +70,7 @@ export const TranscriptionModelIdentifier = {
     OpenaiWhisper1: "openai.whisper-1",
     OpenaiGpt4OTranscribe: "openai.gpt-4o-transcribe",
     OpenaiGpt4OMiniTranscribe: "openai.gpt-4o-mini-transcribe",
+    OpenaiGpt4OTranscribeDiarize: "openai.gpt-4o-transcribe-diarize",
     RevaiMachine: "revai.machine",
     RevaiFusion: "revai.fusion",
     SpeechmaticsEnhanced: "speechmatics.enhanced",

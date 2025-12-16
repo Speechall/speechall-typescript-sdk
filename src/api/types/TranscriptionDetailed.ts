@@ -12,12 +12,8 @@ export interface TranscriptionDetailed {
     text: string;
     /** The detected or specified language of the audio (ISO 639-1 code). */
     language?: string;
-    /** The total duration of the processed audio file in seconds. **Deprecated**: This property may be removed in future versions as duration analysis might occur asynchronously. Rely on segment end times for duration information if needed. */
-    duration?: number;
-    /** An array of transcribed segments, providing time-coded chunks of the transcription. The level of detail (word vs. segment timestamps) depends on the `timestamp_granularity` request parameter. May include speaker labels if diarization was enabled. */
+    /** An array of transcribed segments, providing time-coded chunks of the transcription. May include speaker labels if diarization was enabled. */
     segments?: Speechall.TranscriptionSegment[];
-    /** An array of transcribed words, providing time-coded chunks of the transcription. The level of detail (word vs. segment timestamps) depends on the `timestamp_granularity` request parameter. May include speaker labels if diarization was enabled. */
+    /** An array of transcribed words, providing time-coded chunks of the transcription. May include speaker labels if diarization was enabled. */
     words?: Speechall.TranscriptionWord[];
-    /** An optional object containing additional metadata returned directly from the underlying STT provider. The structure of this object is provider-dependent. */
-    provider_metadata?: Record<string, unknown>;
 }
