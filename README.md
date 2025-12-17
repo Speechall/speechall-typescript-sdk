@@ -1,6 +1,6 @@
 # Speechall TypeScript SDK
 
-[![npm version](https://img.shields.io/npm/v/speechall.svg)](https://www.npmjs.com/package/speechall)
+[![npm version](https://img.shields.io/npm/v/@speechall/sdk.svg)](https://www.npmjs.com/package/@speechall/sdk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Official TypeScript SDK for [Speechall](https://speechall.com) - A powerful speech-to-text API with support for multiple providers and advanced features like speaker diarization, custom vocabulary, and replacement rules.
@@ -17,21 +17,21 @@ Official TypeScript SDK for [Speechall](https://speechall.com) - A powerful spee
 ## Installation
 
 ```bash
-npm install speechall
+npm install @speechall/sdk
 ```
 
 Or using other package managers:
 
 ```bash
-yarn add speechall
+yarn add @speechall/sdk
 # or
-pnpm add speechall
+pnpm add @speechall/sdk
 ```
 
 ## Quick Start
 
 ```typescript
-import { SpeechallClient } from 'speechall';
+import { SpeechallClient } from '@speechall/sdk';
 import fs from 'fs';
 
 // Initialize the client with your API token
@@ -89,7 +89,7 @@ const client = new SpeechallClient({
 Transcribe a local audio file:
 
 ```typescript
-import { SpeechallClient } from 'speechall';
+import { SpeechallClient } from '@speechall/sdk';
 import fs from 'fs';
 
 const client = new SpeechallClient({ token: 'your-api-token' });
@@ -230,7 +230,7 @@ import {
   SpeechallError,
   SpeechallTimeoutError,
   Speechall
-} from 'speechall';
+} from '@speechall/sdk';
 
 const client = new SpeechallClient({ token: 'your-api-token' });
 
@@ -300,7 +300,7 @@ import {
   SpeechallClient,
   Speechall,
   type SpeechallClient as SpeechallClientTypes
-} from 'speechall';
+} from '@speechall/sdk';
 
 // Access types
 type TranscriptionResponse = Speechall.TranscriptionResponse;
