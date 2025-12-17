@@ -1,15 +1,18 @@
 # Speechall TypeScript SDK
 
-A TypeScript/JavaScript SDK for the Speechall API, providing powerful and flexible speech-to-text capabilities. This SDK allows you to transcribe audio files using various STT providers and models, apply custom text replacement rules, and access results in multiple formats.
+[![npm version](https://img.shields.io/npm/v/@speechall/sdk.svg)](https://www.npmjs.com/package/@speechall/sdk)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+Official TypeScript SDK for [Speechall](https://speechall.com) - A powerful speech-to-text API with support for multiple providers and advanced features like speaker diarization, custom vocabulary, and replacement rules.
 
 ## Features
 
-- **Multiple STT Providers**: Access various speech-to-text providers through a unified API
-- **Custom Text Replacement**: Apply custom replacement rules to improve transcription accuracy
-- **Multiple Output Formats**: Get results in JSON, text, SRT, VTT, or verbose JSON formats
-- **OpenAI Compatibility**: Use OpenAI-compatible endpoints for easy migration
-- **TypeScript Support**: Full TypeScript support with comprehensive type definitions
-- **Promise-based**: Modern async/await support with Axios under the hood
+- Support for multiple speech-to-text providers (OpenAI Whisper, Deepgram, AssemblyAI, RevAI, Amazon Transcribe, and more)
+- Speaker diarization
+- Custom vocabulary and replacement rules
+- Multiple output formats (text, JSON, SRT, VTT)
+- Word-level and segment-level timestamps
+- TypeScript support with full type definitions
 
 ## Installation
 
@@ -17,218 +20,371 @@ A TypeScript/JavaScript SDK for the Speechall API, providing powerful and flexib
 npm install @speechall/sdk
 ```
 
+Or using other package managers:
+
+```bash
+yarn add @speechall/sdk
+# or
+pnpm add @speechall/sdk
+```
+
 ## Quick Start
 
 ```typescript
-import { Configuration, SpeechToTextApi } from '@speechall/sdk';
+import { SpeechallClient } from '@speechall/sdk';
+import fs from 'fs';
 
-// Configure the SDK
-const config = new Configuration({
-  apiKey: 'your-api-key-here',
-  basePath: 'https://api.speechall.com' // Replace with actual API base path
+// Initialize the client with your API token
+const client = new SpeechallClient({
+  token: 'your-api-token',
 });
 
-// Create API instance
-const speechApi = new SpeechToTextApi(config);
-
-// Transcribe audio from URL
+// Transcribe an audio file
 async function transcribeAudio() {
-  try {
-    const response = await speechApi.transcribeRemote({
-      file_url: 'https://example.com/audio.mp3',
-      model: 'deepgram.nova-2-general',
-      language: 'en',
-      output_format: 'json'
-    });
-    
-    console.log('Transcription:', response.data.text);
-  } catch (error) {
-    console.error('Transcription failed:', error);
-  }
+  const audioFile = fs.createReadStream('./audio.mp3');
+
+  const result = await client.speechToText.transcribe(audioFile, {
+    model: 'openai.whisper-1',
+    language: 'en',
+    output_format: 'json',
+  });
+
+  console.log('Transcription:', result.text);
 }
 
 transcribeAudio();
 ```
 
+## Configuration Options
+
+### Client Options
+
+```typescript
+const client = new SpeechallClient({
+  // Required: Your API token for authentication
+  token: 'your-api-token',
+
+  // Optional: Custom base URL for self-hosted or custom endpoints
+  baseUrl: 'https://api.speechall.com/v1',
+
+  // Optional: Default timeout for requests in seconds (default: 60)
+  timeoutInSeconds: 120,
+
+  // Optional: Maximum number of retries for failed requests (default: 2)
+  maxRetries: 3,
+
+  // Optional: Additional headers to include in all requests
+  headers: {
+    'X-Custom-Header': 'value',
+  },
+});
+```
+
 ## API Reference
 
-### Main API Classes
+### Speech-to-Text API
 
-- **SpeechToTextApi**: Core transcription functionality
-- **OpenAICompatibleSpeechToTextApi**: OpenAI-compatible endpoints
-- **ReplacementRulesApi**: Manage custom text replacement rules
+#### Transcribe Audio File
 
-### Configuration
+Transcribe a local audio file:
 
 ```typescript
-const config = new Configuration({
-  apiKey: 'your-api-key',           // Your API key
-  basePath: 'https://api.speechall.com', // API base URL
-  // Optional: custom axios configuration
-  baseOptions: {
-    timeout: 30000,
-    headers: {
-      'Custom-Header': 'value'
-    }
+import { SpeechallClient } from '@speechall/sdk';
+import fs from 'fs';
+
+const client = new SpeechallClient({ token: 'your-api-token' });
+
+const result = await client.speechToText.transcribe(
+  fs.createReadStream('./audio.mp3'),
+  {
+    model: 'openai.whisper-1',
+    language: 'en',
+    output_format: 'json',
+    punctuation: true,
+    timestamp_granularity: 'word', // 'word' or 'segment'
   }
-});
-```
-
-### Transcription Options
-
-```typescript
-interface TranscriptionOptions {
-  file_url: string;                    // Audio file URL
-  model: TranscriptionModelIdentifier; // Model to use
-  language?: string;                   // Language code (e.g., 'en', 'es')
-  output_format?: string;              // 'json', 'text', 'srt', 'vtt'
-  punctuation?: boolean;               // Add punctuation
-  timestamp_granularity?: string;      // 'word' or 'segment'
-  diarization?: boolean;               // Speaker identification
-  initial_prompt?: string;             // Transcription hint
-  temperature?: number;                // Model randomness (0-1)
-  smart_format?: boolean;              // Provider-specific formatting
-  speakers_expected?: number;          // Expected number of speakers
-  custom_vocabulary?: string[];        // Custom words/phrases
-  replacement_ruleset?: ReplacementRule[]; // Custom replacement rules
-}
-```
-
-## Examples
-
-### Basic Transcription
-
-```typescript
-import { Configuration, SpeechToTextApi } from '@speechall/sdk';
-
-const config = new Configuration({ apiKey: 'your-api-key' });
-const api = new SpeechToTextApi(config);
-
-const result = await api.transcribeRemote({
-  file_url: 'https://example.com/audio.wav',
-  model: 'deepgram.nova-2-general'
-});
-
-console.log(result.data.text);
-```
-
-### File Upload Transcription
-
-```typescript
-// For file uploads, you'll need to create a File object
-const file = new File([audioBuffer], 'audio.mp3', { type: 'audio/mpeg' });
-
-const result = await api.transcribe(
-  'deepgram.nova-2-general', // model
-  file,                      // audio file
-  'en',                      // language
-  'json'                     // output format
 );
+
+console.log(result.text);
+console.log(result.segments); // Time-coded segments
+console.log(result.words);    // Word-level timestamps
 ```
 
-### Advanced Options
+#### Transcribe Remote Audio URL
+
+Transcribe an audio file from a URL:
 
 ```typescript
-const result = await api.transcribeRemote({
-  file_url: 'https://example.com/meeting.mp3',
-  model: 'deepgram.nova-2-meeting',
+const result = await client.speechToText.transcribeRemote({
+  model: 'openai.whisper-1',
   language: 'en',
   output_format: 'json',
-  diarization: true,           // Identify speakers
-  punctuation: true,           // Add punctuation
-  timestamp_granularity: 'word', // Word-level timestamps
-  speakers_expected: 3,        // Hint for speaker count
-  custom_vocabulary: ['API', 'TypeScript', 'Speechall']
+  diarization: true, // Enable speaker identification
+  file_url: 'https://example.com/path/to/audio.mp3',
 });
 ```
 
-### Custom Replacement Rules
+#### List Available Models
+
+Get all available speech-to-text models and their capabilities:
 
 ```typescript
-import { ReplacementRulesApi } from '@speechall/sdk';
+const models = await client.speechToText.listSpeechToTextModels();
 
-const rulesApi = new ReplacementRulesApi(config);
+models.forEach(model => {
+  console.log(`${model.identifier}: ${model.name}`);
+  console.log(`  Supported languages: ${model.supported_languages?.join(', ')}`);
+  console.log(`  Supports diarization: ${model.supports_diarization}`);
+});
+```
 
+### Advanced Features
+
+#### Speaker Diarization
+
+Identify different speakers in the audio:
+
+```typescript
+const result = await client.speechToText.transcribe(audioFile, {
+  model: 'deepgram.nova-2',
+  language: 'en',
+  output_format: 'json',
+  diarization: true,
+  speakers_expected: 2, // Optional: hint about number of speakers
+});
+
+// Access speaker information in segments
+result.segments?.forEach(segment => {
+  console.log(`Speaker ${segment.speaker}: ${segment.text}`);
+});
+```
+
+#### Custom Vocabulary
+
+Improve recognition of specific words or phrases:
+
+```typescript
+const result = await client.speechToText.transcribe(audioFile, {
+  model: 'deepgram.nova-2',
+  language: 'en',
+  custom_vocabulary: ['Speechall', 'API', 'TypeScript SDK'],
+});
+```
+
+#### Using an Initial Prompt
+
+Guide the model's style or provide context:
+
+```typescript
+const result = await client.speechToText.transcribe(audioFile, {
+  model: 'openai.whisper-1',
+  language: 'en',
+  initial_prompt: 'This is a technical discussion about machine learning and AI.',
+});
+```
+
+### Replacement Rules
+
+Create and use replacement rulesets to automatically modify transcription output:
+
+```typescript
 // Create a replacement ruleset
-const ruleset = await rulesApi.createReplacementRuleset({
-  name: 'Technical Terms',
+const ruleset = await client.replacementRules.create({
+  name: 'Acme Corp Corrections',
   rules: [
     {
       kind: 'exact',
-      search: 'API',
-      replacement: 'A.P.I.',
-      caseSensitive: false
+      search: 'customer X',
+      replacement: '[REDACTED CUSTOMER NAME]',
     },
     {
       kind: 'regex',
-      pattern: '\\b(\\d+)\\s*dollars?\\b',
-      replacement: '$$$1',
-      flags: ['i']
-    }
-  ]
+      pattern: '\\b\\d{4}\\b',
+      replacement: '[REDACTED YEAR]',
+    },
+    {
+      kind: 'regex_group',
+      pattern: '(API)\\s+(key)',
+      replacement: '$1 token',
+    },
+  ],
 });
+
+console.log('Ruleset ID:', ruleset.id);
 
 // Use the ruleset in transcription
-const result = await api.transcribeRemote({
-  file_url: 'https://example.com/audio.mp3',
-  model: 'deepgram.nova-2-general',
-  // Reference the created ruleset
-  // ruleset_id: ruleset.data.id
-});
-```
-
-### List Available Models
-
-```typescript
-const models = await api.listSpeechToTextModels();
-
-models.data.forEach(model => {
-  console.log(`${model.id}: ${model.display_name}`);
-  console.log(`  Provider: ${model.provider}`);
-  console.log(`  Languages: ${model.supported_languages?.join(', ')}`);
-  console.log(`  Cost: $${model.cost_per_second_usd}/second`);
+const result = await client.speechToText.transcribe(audioFile, {
+  model: 'openai.whisper-1',
+  language: 'en',
+  ruleset_id: ruleset.id,
 });
 ```
 
 ## Error Handling
 
+The SDK provides specific error types for different HTTP status codes:
+
 ```typescript
-import { AxiosError } from 'axios';
+import {
+  SpeechallClient,
+  SpeechallError,
+  SpeechallTimeoutError,
+  Speechall
+} from '@speechall/sdk';
+
+const client = new SpeechallClient({ token: 'your-api-token' });
 
 try {
-  const result = await api.transcribeRemote({
-    file_url: 'https://example.com/audio.mp3',
-    model: 'deepgram.nova-2-general'
+  const result = await client.speechToText.transcribe(audioFile, {
+    model: 'openai.whisper-1',
   });
+  console.log(result.text);
 } catch (error) {
-  if (error instanceof AxiosError) {
-    console.error('API Error:', error.response?.data);
-    console.error('Status:', error.response?.status);
+  if (error instanceof Speechall.UnauthorizedError) {
+    console.error('Invalid API token');
+  } else if (error instanceof Speechall.PaymentRequiredError) {
+    console.error('Insufficient credits');
+  } else if (error instanceof Speechall.TooManyRequestsError) {
+    console.error('Rate limit exceeded');
+  } else if (error instanceof Speechall.BadRequestError) {
+    console.error('Invalid request:', error.message);
+  } else if (error instanceof SpeechallTimeoutError) {
+    console.error('Request timed out');
+  } else if (error instanceof SpeechallError) {
+    console.error('API error:', error.message);
   } else {
     console.error('Unexpected error:', error);
   }
 }
 ```
 
-## Types
+### Available Error Types
 
-The SDK includes comprehensive TypeScript types for all API entities:
+- `BadRequestError` (400) - Invalid request parameters
+- `UnauthorizedError` (401) - Invalid or missing API token
+- `PaymentRequiredError` (402) - Insufficient credits
+- `NotFoundError` (404) - Resource not found
+- `TooManyRequestsError` (429) - Rate limit exceeded
+- `InternalServerError` (500) - Server error
+- `ServiceUnavailableError` (503) - Service temporarily unavailable
+- `GatewayTimeoutError` (504) - Gateway timeout
+- `SpeechallTimeoutError` - Request timeout
+- `SpeechallError` - Base error class for all other errors
 
-- `TranscriptionResponse` - Transcription results
-- `TranscriptionOptions` - Transcription request options
-- `SpeechToTextModel` - Model information
-- `ReplacementRule` - Text replacement rules
-- `Configuration` - SDK configuration
-- And many more...
+## Request-Specific Options
 
-## Contributing
+You can override client-level configuration for individual requests:
 
-This SDK is auto-generated from the Speechall OpenAPI specification. Please report issues or feature requests on the [GitHub repository](https://github.com/speechall/speechall-typescript-sdk).
+```typescript
+const result = await client.speechToText.transcribe(
+  audioFile,
+  {
+    model: 'openai.whisper-1',
+  },
+  {
+    timeoutInSeconds: 180,
+    maxRetries: 5,
+    headers: {
+      'X-Request-ID': 'custom-request-id',
+    },
+  }
+);
+```
 
-## License
+## TypeScript Support
 
-MIT
+The SDK is fully typed with TypeScript definitions. All types are exported and can be imported:
+
+```typescript
+import {
+  SpeechallClient,
+  Speechall,
+  type SpeechallClient as SpeechallClientTypes
+} from '@speechall/sdk';
+
+// Access types
+type TranscriptionResponse = Speechall.TranscriptionResponse;
+type TranscribeRequest = Speechall.TranscribeRequest;
+type SpeechToTextModel = Speechall.SpeechToTextModel;
+type ClientOptions = SpeechallClientTypes.Options;
+```
+
+## Supported Audio Formats
+
+- MP3
+- MP4
+- MPEG
+- MPGA
+- M4A
+- WAV
+- WEBM
+- OGG
+- FLAC
+
+Note: Actual format support may vary by provider. Check the model capabilities using `listSpeechToTextModels()`.
+
+## Output Formats
+
+- `text` - Plain text output
+- `json` - Detailed JSON with segments and metadata
+- `json_text` - Simple JSON with text only
+- `srt` - SubRip subtitle format
+- `vtt` - WebVTT subtitle format
+
+## Development
+
+### Regenerating the SDK
+
+This SDK is auto-generated using [Fern](https://buildwithfern.com) from the Speechall OpenAPI specification. To regenerate the SDK after API changes:
+
+```bash
+./regenerate.sh
+```
+
+Or manually:
+
+```bash
+# Validate the OpenAPI spec
+fern check
+
+# Generate the SDK
+fern generate --local --force
+
+# Verify TypeScript compilation
+npx tsc --noEmit
+```
+
+### Building the SDK
+
+```bash
+npm install
+npm run build
+```
+
+### Running Tests
+
+```bash
+npm test
+```
 
 ## Support
 
-For support, please contact [support@speechall.ai](mailto:support@speechall.ai) or visit our [documentation](https://docs.speechall.ai).
+- Documentation: [https://docs.speechall.com](https://docs.speechall.com)
+- API Reference: [https://api.speechall.com/docs](https://api.speechall.com/docs)
+- GitHub Issues: [https://github.com/Speechall/speechall-typescript-sdk/issues](https://github.com/Speechall/speechall-typescript-sdk/issues)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+Note: This SDK is auto-generated. For API changes, please open an issue first to discuss the proposed changes.

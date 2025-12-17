@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://schema.buildwithfern.dev/generators-yml.json
+api:
+  specs:
+    # Fern doesn't support remote URLs in generators.yml (only local paths)
+    # The remote URL is public: https://raw.githubusercontent.com/Speechall/speechall-openapi/refs/heads/main/openapi.yaml
+    # But must be downloaded locally first via: fern init --openapi <url>
+    - openapi: ../../../Speechall-Repositories/speechall-openapi/openapi.yaml
+
+default-group: local
+
+groups:
+  local:
+    generators:
+      - name: fernapi/fern-typescript-sdk
+        version: 3.42.0
+        output:
+          location: local-file-system
+          path: ../src
+        config:
+          namespaceExport: Speechall
+          enableInlineTypes: true
+          generateWireTests: true
+          neverThrowErrors: false
+          skipResponseValidation: false
+          treatUnknownAsAny: false
+          outputSourceFiles: true
+          packageJson:
+            name: "@speechall/sdk"
+            version: 2.0.0
+            description: "TypeScript SDK for Speechall API - Speech-to-text transcription
+              service"
+            author: Speechall
+            license: MIT
+            repository:
+              type: git
+              url: "https://github.com/Speechall/speechall-typescript-sdk"
+            homepage: "https://docs.speechall.com"
+            keywords:
+              - speechall
+              - speech-to-text
+              - transcription
+              - api
+              - sdk
