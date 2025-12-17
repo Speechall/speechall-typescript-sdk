@@ -58,3 +58,10 @@ jobs:
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trigger npm publish workflow
+        if: steps.check_tag.outputs.exists == 'false'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          event-type: npm-publish
+          client-payload: '{"tag": "${{ steps.version.outputs.tag }}", "version": "${{ steps.version.outputs.version }}"}'
