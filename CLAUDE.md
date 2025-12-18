@@ -29,6 +29,60 @@ fern check              # Validate OpenAPI spec
 npx tsx examples/basic-transcription.ts  # Use tsx, not ts-node
 ```
 
+## Release Process
+
+### Automated Release Workflow
+
+**The release process is fully automated.** When you push a version bump to `main`, GitHub Actions automatically creates a GitHub Release and publishes to npm.
+
+```bash
+# 1. Update version in fern/generators.yml
+# Edit line 29: version: X.Y.Z
+
+# 2. Update version in package.json
+# Edit line 3: "version": "X.Y.Z"
+
+# 3. Add CHANGELOG entry
+# Add new section at top of CHANGELOG.md
+
+# 4. Commit and push to main
+git add fern/generators.yml package.json CHANGELOG.md
+git commit -m "chore: bump version to X.Y.Z"
+git push origin main
+
+# Automatic flow triggers:
+# → auto-release.yml detects package.json change
+# → Creates GitHub Release vX.Y.Z
+# → Triggers repository_dispatch event
+# → release.yml publishes to npm
+```
+
+### npm Trusted Publishing
+
+**Authentication:** Uses OIDC Trusted Publishing (no long-lived tokens needed)
+
+**Requirements:**
+- npm CLI version 11.5.1+ (enforced in workflow)
+- Trusted Publisher configured on npmjs.org for `@speechall/sdk`
+- GitHub Actions permissions: `id-token: write`
+
+**Configuration on npmjs.org:**
+- Repository: `Speechall/speechall-typescript-sdk`
+- Workflow: `release.yml`
+- Environment: (none)
+
+**If npm publish fails:**
+1. Verify Trusted Publisher is configured correctly on npmjs.org
+2. Check that you have admin access to `@speechall` npm organization
+3. Ensure npm version is 11.5.1+ (workflow installs latest automatically)
+4. Verify `id-token: write` permission in `.github/workflows/release.yml`
+
+### Manual Version Bump Notes
+
+- **fern/generators.yml** (line 29) controls the version in generated code
+- **package.json** may need manual update (Fern only regenerates `src/`)
+- **CHANGELOG.md** follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format
+
 ## Architecture
 
 ### Code Generation Flow
