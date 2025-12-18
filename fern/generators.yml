@@ -26,7 +26,7 @@ groups:
           outputSourceFiles: true
           packageJson:
             name: "@speechall/sdk"
-            version: 2.0.3
+            version: 2.0.4
             description: "TypeScript SDK for Speechall API - Speech-to-text transcription
               service"
             author: Speechall

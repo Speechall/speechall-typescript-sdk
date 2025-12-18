@@ -19,11 +19,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
 
-      - name: Configure npm for publishing
-        run: npm config set registry https://registry.npmjs.org/
+      - name: Ensure npm version supports Trusted Publishing
+        run: |
+          npm --version
+          npm install -g npm@latest
+          npm --version
 
       - name: Verify version matches release tag
         run: |
@@ -50,6 +54,4 @@ jobs:
         run: npm test
 
       - name: Publish to npm
-        run: npm publish --access public --provenance
-        env:
-          NPM_CONFIG_PROVENANCE: true
+        run: npm publish --access public
