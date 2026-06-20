@@ -125,5 +125,3 @@ SDK provides typed errors for HTTP status codes:
 - `InternalServerError` (500), `ServiceUnavailableError` (503), `GatewayTimeoutError` (504)
 - `SpeechallTimeoutError` - Request timeout
 - `SpeechallError` - Base error class
-
-@AGENTS.md
