@@ -4,7 +4,7 @@ import type * as Speechall from "../../../../index.js";
 
 export interface TranscribeRequest {
     /** The identifier of the speech-to-text model to use for the transcription, in the format `provider.model`. See the `/speech-to-text-models` endpoint for available models. */
-    model: Speechall.TranscriptionModelIdentifier;
+    model: Speechall.OpenTranscriptionModelIdentifier;
     /** The language of the audio file in ISO 639-1 format (e.g., `en`, `es`, `fr`). Specify `auto` for automatic language detection (if supported by the model). Defaults to `en` if not provided. Providing the correct language improves accuracy and latency. */
     language?: Speechall.TranscriptLanguageCode;
     /** The desired format for the transcription output. Can be plain text, JSON objects (simple or detailed), or subtitle formats (SRT, VTT). Defaults to `text`. */

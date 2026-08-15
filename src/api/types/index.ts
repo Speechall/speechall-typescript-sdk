@@ -1,6 +1,7 @@
 export * from "./BaseTranscriptionConfiguration.js";
 export * from "./ErrorResponse.js";
 export * from "./ExactRule.js";
+export * from "./OpenTranscriptionModelIdentifier.js";
 export * from "./RegexGroupRule.js";
 export * from "./RegexRule.js";
 export * from "./ReplacementRule.js";

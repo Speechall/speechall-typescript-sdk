@@ -7,7 +7,7 @@ import type * as Speechall from "../index.js";
  */
 export interface SpeechToTextModel {
     /** The unique identifier for this model (`provider.model_name`). */
-    id: Speechall.TranscriptionModelIdentifier;
+    id: Speechall.OpenTranscriptionModelIdentifier;
     /** A user-friendly name for the model. */
     display_name: string;
     /** The provider of this model. */
