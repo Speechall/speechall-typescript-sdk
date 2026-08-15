@@ -7,7 +7,7 @@ import type * as Speechall from "../index.js";
  */
 export interface BaseTranscriptionConfiguration {
     /** The identifier of the speech-to-text model to use. */
-    model: Speechall.TranscriptionModelIdentifier;
+    model: Speechall.OpenTranscriptionModelIdentifier;
     /** The language code (ISO 639-1) of the audio. Defaults to `en`. Use `auto` for automatic detection if supported. */
     language?: Speechall.TranscriptLanguageCode;
     /** The desired format for the transcription output. Defaults to `text`. */

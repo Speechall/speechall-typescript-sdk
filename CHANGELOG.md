@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2026-08-15
+
+### Added
+
+- Added the `elevenlabs.scribe-v2` transcription model identifier.
+- Added the `revai.fusion` transcription model identifier.
+- Added the `revai.machine` transcription model identifier.
+- Added the `speechmatics.enhanced` transcription model identifier.
+- Added the `speechmatics.standard` transcription model identifier.
+
+### Removed
+
+- Removed the `assemblyai.universal` transcription model identifier.
+- Removed the `falai.cohere-transcribe` transcription model identifier.
+- Removed the `falai.nvidia-nemotron-asr-multilingual` transcription model identifier.
+- Removed the `falai.whisper` transcription model identifier.
+- Removed the `falai.wizper` transcription model identifier.
+- Removed the `fireworksai.whisper-v3` transcription model identifier.
+- Removed the `fireworksai.whisper-v3-turbo` transcription model identifier.
+
 ## [2.2.0] - 2026-08-01
 
 ### Changed

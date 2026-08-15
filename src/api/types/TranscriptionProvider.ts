@@ -8,8 +8,6 @@ export const TranscriptionProvider = {
     Cloudflare: "cloudflare",
     Deepgram: "deepgram",
     Elevenlabs: "elevenlabs",
-    Falai: "falai",
-    Fireworksai: "fireworksai",
     Gemini: "gemini",
     Gladia: "gladia",
     Google: "google",
