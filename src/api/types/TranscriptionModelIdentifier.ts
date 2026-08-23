@@ -59,6 +59,8 @@ export const TranscriptionModelIdentifier = {
     RevaiMachine: "revai.machine",
     SpeechmaticsEnhanced: "speechmatics.enhanced",
     SpeechmaticsStandard: "speechmatics.standard",
+    TogetheraiNvidiaParakeetTdt06Bv3: "togetherai.nvidia-parakeet-tdt-0.6b-v3",
+    XaiGrokStt: "xai.grok-stt",
 } as const;
 export type TranscriptionModelIdentifier =
     (typeof TranscriptionModelIdentifier)[keyof typeof TranscriptionModelIdentifier];

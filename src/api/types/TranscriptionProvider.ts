@@ -17,5 +17,7 @@ export const TranscriptionProvider = {
     Openai: "openai",
     Revai: "revai",
     Speechmatics: "speechmatics",
+    Togetherai: "togetherai",
+    Xai: "xai",
 } as const;
 export type TranscriptionProvider = (typeof TranscriptionProvider)[keyof typeof TranscriptionProvider];
