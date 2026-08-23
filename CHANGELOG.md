@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2026-08-23
+
+### Added
+
+- Added the `togetherai.nvidia-parakeet-tdt-0.6b-v3` transcription model identifier.
+- Added the `xai.grok-stt` transcription model identifier.
+- Added the `togetherai` transcription provider identifier.
+- Added the `xai` transcription provider identifier.
+
 ## [2.3.0] - 2026-08-15
 
 ### Added
