@@ -2,7 +2,6 @@
 
 /** Unique identifier for a specific Speech-to-Text model, composed as `provider.model_name`. Used to select the engine for transcription. */
 export const TranscriptionModelIdentifier = {
-    AmazonTranscribe: "amazon.transcribe",
     AssemblyaiUniversal2: "assemblyai.universal-2",
     AssemblyaiUniversal35Pro: "assemblyai.universal-3-5-pro",
     AzureStandard: "azure.standard",
@@ -44,8 +43,6 @@ export const TranscriptionModelIdentifier = {
     GeminiGemini25FlashLite: "gemini.gemini-2.5-flash-lite",
     GeminiGemini25Pro: "gemini.gemini-2.5-pro",
     GladiaStandard: "gladia.standard",
-    GoogleEnhanced: "google.enhanced",
-    GoogleStandard: "google.standard",
     GroqWhisperLargeV3: "groq.whisper-large-v3",
     GroqWhisperLargeV3Turbo: "groq.whisper-large-v3-turbo",
     IbmStandard: "ibm.standard",
@@ -57,9 +54,14 @@ export const TranscriptionModelIdentifier = {
     OpenaiWhisper1: "openai.whisper-1",
     RevaiFusion: "revai.fusion",
     RevaiMachine: "revai.machine",
+    SmallestaiPulsePro: "smallestai.pulse-pro",
+    SmallestaiPulse: "smallestai.pulse",
+    SonioxSttAsyncV5: "soniox.stt-async-v5",
     SpeechmaticsEnhanced: "speechmatics.enhanced",
     SpeechmaticsStandard: "speechmatics.standard",
     TogetheraiNvidiaParakeetTdt06Bv3: "togetherai.nvidia-parakeet-tdt-0.6b-v3",
+    TogetheraiThinkingmachinesInkling: "togetherai.thinkingmachines-inkling",
+    TogetheraiThinkingmachinesInklingSmall: "togetherai.thinkingmachines-inkling-small",
     XaiGrokStt: "xai.grok-stt",
 } as const;
 export type TranscriptionModelIdentifier =

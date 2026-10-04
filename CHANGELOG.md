@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2026-10-04
+
+### Added
+
+- Added the `smallestai.pulse` and `smallestai.pulse-pro` transcription model identifiers.
+- Added the `soniox.stt-async-v5` transcription model identifier.
+- Added the `togetherai.thinkingmachines-inkling` and `togetherai.thinkingmachines-inkling-small` transcription model identifiers.
+- Added the `smallestai` and `soniox` transcription provider identifiers.
+
+### Removed
+
+- Removed the `amazon` and `google` transcription provider identifiers.
+- Removed the `amazon.transcribe`, `google.enhanced`, and `google.standard` transcription model identifiers. Gemini models remain supported.
+- This removal is a breaking catalog change and requires a major version bump.
+
 ## [2.4.0] - 2026-08-23
 
 ### Added

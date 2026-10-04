@@ -2,7 +2,6 @@
 
 /** The identifier for the underlying Speech-to-Text service provider (e.g., 'openai', 'deepgram'). */
 export const TranscriptionProvider = {
-    Amazon: "amazon",
     Assemblyai: "assemblyai",
     Azure: "azure",
     Cloudflare: "cloudflare",
@@ -10,12 +9,13 @@ export const TranscriptionProvider = {
     Elevenlabs: "elevenlabs",
     Gemini: "gemini",
     Gladia: "gladia",
-    Google: "google",
     Groq: "groq",
     Ibm: "ibm",
     Mistral: "mistral",
     Openai: "openai",
     Revai: "revai",
+    Smallestai: "smallestai",
+    Soniox: "soniox",
     Speechmatics: "speechmatics",
     Togetherai: "togetherai",
     Xai: "xai",
