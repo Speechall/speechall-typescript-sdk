@@ -61,7 +61,6 @@ export const TranscriptionModelIdentifier = {
     SpeechmaticsStandard: "speechmatics.standard",
     TogetheraiNvidiaParakeetTdt06Bv3: "togetherai.nvidia-parakeet-tdt-0.6b-v3",
     TogetheraiThinkingmachinesInkling: "togetherai.thinkingmachines-inkling",
-    TogetheraiThinkingmachinesInklingSmall: "togetherai.thinkingmachines-inkling-small",
     XaiGrokStt: "xai.grok-stt",
 } as const;
 export type TranscriptionModelIdentifier =
