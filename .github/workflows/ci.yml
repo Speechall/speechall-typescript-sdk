@@ -38,4 +38,4 @@ jobs:
         run: npm run test:integration
 
       - name: Test package can be imported
-        run: node -e "require('./dist/index.js')"
+        run: npm run test:package

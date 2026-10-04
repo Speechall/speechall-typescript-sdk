@@ -1,6 +1,6 @@
 {
   "name": "@speechall/sdk",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "TypeScript SDK for Speechall API - Speech-to-text transcription service",
   "author": "Speechall",
   "license": "MIT",
@@ -18,10 +18,14 @@
   ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",
     "test": "jest",
+    "test:package": "node scripts/test-package.cjs",
     "test:unit": "jest tests/unit",
     "test:integration": "jest tests/integration",
     "test:coverage": "jest --coverage",
