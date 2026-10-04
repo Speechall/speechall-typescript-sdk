@@ -7,7 +7,7 @@ Official TypeScript SDK for [Speechall](https://speechall.com) - A powerful spee
 
 ## Features
 
-- Support for multiple speech-to-text providers (OpenAI Whisper, Deepgram, AssemblyAI, RevAI, Amazon Transcribe, and more)
+- Support for multiple speech-to-text providers (OpenAI Whisper, Deepgram, AssemblyAI, RevAI, Gemini, Smallest AI, Soniox, and more)
 - Speaker diarization
 - Custom vocabulary and replacement rules
 - Multiple output formats (text, JSON, SRT, VTT)

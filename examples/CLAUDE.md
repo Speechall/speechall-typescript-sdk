@@ -95,7 +95,7 @@ console.log(models);
 
 Popular models include:
 - `openai.whisper-1` - OpenAI's Whisper model
-- `amazon.transcribe` - Amazon Transcribe
+- `gemini.gemini-2.5-flash` - Gemini 2.5 Flash
 - `deepgram.nova-2` - Deepgram Nova 2
 - `assemblyai.best` - AssemblyAI's best model
 
