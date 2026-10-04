@@ -9,8 +9,10 @@ async function main() {
     // same installed runtime dependencies as a consumer installation.
     const directory = fs.mkdtempSync(path.join(process.cwd(), ".package-smoke-"));
     try {
-        const packed = JSON.parse(execFileSync("npm", ["pack", "--json", "--ignore-scripts", "--cache", path.join(directory, "cache"), "--pack-destination", directory], { encoding: "utf8" }));
-        execFileSync("tar", ["-xzf", path.join(directory, packed[0].filename), "-C", directory]);
+        const result = JSON.parse(execFileSync("npm", ["pack", "--json", "--ignore-scripts", "--cache", path.join(directory, "cache"), "--pack-destination", directory], { encoding: "utf8" }));
+        // npm 12 keys pack results by package name; earlier versions use an array.
+        const [packed] = Array.isArray(result) ? result : Object.values(result);
+        execFileSync("tar", ["-xzf", path.join(directory, packed.filename), "-C", directory]);
         const packageDirectory = path.join(directory, "package");
         const metadata = JSON.parse(fs.readFileSync(path.join(packageDirectory, "package.json"), "utf8"));
         assert.ok(fs.statSync(path.join(packageDirectory, metadata.main)).isFile(), "JavaScript entrypoint must be packaged");
