@@ -51,6 +51,7 @@ export const TranscriptionModelIdentifier = {
     OpenaiGpt4OMiniTranscribe: "openai.gpt-4o-mini-transcribe",
     OpenaiGpt4OTranscribe: "openai.gpt-4o-transcribe",
     OpenaiGpt4OTranscribeDiarize: "openai.gpt-4o-transcribe-diarize",
+    OpenaiGptTranscribe: "openai.gpt-transcribe",
     OpenaiWhisper1: "openai.whisper-1",
     RevaiFusion: "revai.fusion",
     RevaiMachine: "revai.machine",
