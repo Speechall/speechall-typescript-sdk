@@ -5,6 +5,7 @@ export const TranscriptionModelIdentifier = {
     AssemblyaiUniversal2: "assemblyai.universal-2",
     AssemblyaiUniversal35Pro: "assemblyai.universal-3-5-pro",
     AzureStandard: "azure.standard",
+    MicrosoftMaiTranscribe2: "microsoft.mai-transcribe-2",
     CloudflareWhisper: "cloudflare.whisper",
     CloudflareWhisperLargeV3Turbo: "cloudflare.whisper-large-v3-turbo",
     CloudflareWhisperTinyEn: "cloudflare.whisper-tiny-en",
