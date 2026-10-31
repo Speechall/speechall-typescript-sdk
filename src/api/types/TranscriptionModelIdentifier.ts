@@ -43,6 +43,7 @@ export const TranscriptionModelIdentifier = {
     GeminiGemini25Flash: "gemini.gemini-2.5-flash",
     GeminiGemini25FlashLite: "gemini.gemini-2.5-flash-lite",
     GeminiGemini25Pro: "gemini.gemini-2.5-pro",
+    GeminiGemini35Transcribe: "gemini.gemini-3.5-transcribe",
     GladiaStandard: "gladia.standard",
     GroqWhisperLargeV3: "groq.whisper-large-v3",
     GroqWhisperLargeV3Turbo: "groq.whisper-large-v3-turbo",
