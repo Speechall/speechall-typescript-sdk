@@ -1,4 +1,4 @@
-import { SpeechallClient, SpeechallError } from '../../src';
+import { SpeechallClient, Speechall } from '../../src';
 
 describe('SpeechallClient', () => {
   describe('initialization', () => {
@@ -31,6 +31,38 @@ describe('SpeechallClient', () => {
       });
       expect(client.replacementRules).toBeDefined();
     });
+  });
+
+  it('lists models with unknown catalog values', async () => {
+    const models: Speechall.SpeechToTextModel[] = [{
+      id: 'futurecorp.model-x',
+      display_name: 'FutureCorp Model X',
+      provider: 'futurecorp',
+      model_type: 'podcast',
+      accuracy_tier: 'ultra',
+      is_available: true,
+      supports_srt: false,
+      supports_vtt: false,
+    }];
+    const fetch = jest.fn(async () => new Response(JSON.stringify(models), {
+      headers: { 'Content-Type': 'application/json' },
+    }));
+    const client = new SpeechallClient({
+      token: 'test-api-token',
+      baseUrl: 'https://example.test',
+      fetch,
+    });
+
+    await expect(client.speechToText.listSpeechToTextModels()).resolves.toEqual(models);
+    expect(fetch).toHaveBeenCalledWith(
+      'https://example.test/speech-to-text-models',
+      expect.objectContaining({ method: 'GET' }),
+    );
+  });
+
+  it('keeps the existing model catalog constants available', () => {
+    expect(Speechall.SpeechToTextModel.ModelType).toBe(Speechall.SpeechToTextModelModelType);
+    expect(Speechall.SpeechToTextModel.AccuracyTier).toBe(Speechall.SpeechToTextModelAccuracyTier);
   });
 
   describe('configuration', () => {

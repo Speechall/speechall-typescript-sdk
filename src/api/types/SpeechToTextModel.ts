@@ -11,7 +11,7 @@ export interface SpeechToTextModel {
     /** A user-friendly name for the model. */
     display_name: string;
     /** The provider of this model. */
-    provider: Speechall.TranscriptionProvider;
+    provider: Speechall.OpenTranscriptionProvider;
     /** A brief description of the model, its intended use case, or version notes. */
     description?: string | null;
     /** The cost per second of audio processed in USD. */
@@ -36,10 +36,10 @@ export interface SpeechToTextModel {
     version?: string | null;
     /** The date when this specific version of the model was released or last updated. */
     release_date?: string | null;
-    /** The primary type or training domain of the model. Helps identify suitability for different audio types. */
-    model_type?: SpeechToTextModel.ModelType | null;
-    /** A general indication of the model's expected accuracy level relative to other models. Not a guaranteed metric. */
-    accuracy_tier?: SpeechToTextModel.AccuracyTier | null;
+    /** The primary type or training domain of the model. Helps identify suitability for different audio types. Known values are listed in `SpeechToTextModelModelType`. */
+    model_type?: string | null;
+    /** A general indication of the model's expected accuracy level relative to other models. Not a guaranteed metric. Known values are listed in `SpeechToTextModelAccuracyTier`. */
+    accuracy_tier?: string | null;
     /** A list of audio encodings that this model supports or is optimized for (e.g., LINEAR16, FLAC, MP3, Opus). */
     supported_audio_encodings?: string[] | null;
     /** A list of audio sample rates (in Hz) that this model supports or is optimized for. */
@@ -66,25 +66,12 @@ export interface SpeechToTextModel {
     voice_activity_detection?: boolean | null;
 }
 
+import { SpeechToTextModelAccuracyTier } from "./SpeechToTextModelAccuracyTier.js";
+import { SpeechToTextModelModelType } from "./SpeechToTextModelModelType.js";
+
 export namespace SpeechToTextModel {
-    /** The primary type or training domain of the model. Helps identify suitability for different audio types. */
-    export const ModelType = {
-        General: "general",
-        PhoneCall: "phone_call",
-        Video: "video",
-        CommandAndSearch: "command_and_search",
-        Medical: "medical",
-        Legal: "legal",
-        Voicemail: "voicemail",
-        Meeting: "meeting",
-    } as const;
-    export type ModelType = (typeof ModelType)[keyof typeof ModelType];
-    /** A general indication of the model's expected accuracy level relative to other models. Not a guaranteed metric. */
-    export const AccuracyTier = {
-        Basic: "basic",
-        Standard: "standard",
-        Enhanced: "enhanced",
-        Premium: "premium",
-    } as const;
-    export type AccuracyTier = (typeof AccuracyTier)[keyof typeof AccuracyTier];
+    export const ModelType = SpeechToTextModelModelType;
+    export type ModelType = SpeechToTextModelModelType;
+    export const AccuracyTier = SpeechToTextModelAccuracyTier;
+    export type AccuracyTier = SpeechToTextModelAccuracyTier;
 }
