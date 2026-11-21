@@ -22,4 +22,21 @@ else
     find "$SRC_DIR" -name "*.ts" -exec sed -i 's/^\([[:space:]]*\)\*\/\/\*\*/\1\/\*\*/g' {} +
 fi
 
+# Preserve the public namespace for callers upgrading from inline catalog enums.
+MODEL_FILE="$SRC_DIR/api/types/SpeechToTextModel.ts"
+if ! grep -q '^export namespace SpeechToTextModel' "$MODEL_FILE"; then
+    cat >> "$MODEL_FILE" <<'EOF'
+
+import { SpeechToTextModelAccuracyTier } from "./SpeechToTextModelAccuracyTier.js";
+import { SpeechToTextModelModelType } from "./SpeechToTextModelModelType.js";
+
+export namespace SpeechToTextModel {
+    export const ModelType = SpeechToTextModelModelType;
+    export type ModelType = SpeechToTextModelModelType;
+    export const AccuracyTier = SpeechToTextModelAccuracyTier;
+    export type AccuracyTier = SpeechToTextModelAccuracyTier;
+}
+EOF
+fi
+
 echo "Post-generation fixes applied successfully."
